@@ -1,6 +1,6 @@
 # NexaBIM Help
 
-NexaBIM is a suite of productivity tools for Autodesk Revit, published by NexaBIM. It adds a NexaBIM tab to the Revit ribbon with tools for coordinates, element and parameter management, data and 3D export, rooms, modelling, coordination, views and an AI connector for Claude Desktop.
+NexaBIM is a suite of productivity tools for Autodesk Revit, published by Naresh Dhami. It adds a NexaBIM tab to the Revit ribbon with tools for coordinates, element and parameter management, data and 3D export, rooms, modelling, coordination, views and an AI connector for Claude Desktop.
 
 This page is the complete user guide. Press F1 while the pointer is over any NexaBIM ribbon button to open that tool's section of this page directly.
 
@@ -8,6 +8,7 @@ This page is the complete user guide. Press F1 while the pointer is over any Nex
 
 * [Requirements](#requirements)
 * [Installation](#installation)
+* [Uninstalling](#uninstalling)
 * [Getting Started](#getting-started)
 * [Coordinates](#coordinates)
   * [Location Info](#location-info)
@@ -60,6 +61,7 @@ This page is the complete user guide. Press F1 while the pointer is over any Nex
 * [Troubleshooting](#troubleshooting)
 * [Frequently Asked Questions](#frequently-asked-questions)
 * [Privacy](#privacy)
+* [License](#license)
 * [Third Party Notices](#third-party-notices)
 * [Support](#support)
 
@@ -68,7 +70,7 @@ This page is the complete user guide. Press F1 while the pointer is over any Nex
 * Autodesk Revit 2024, 2025, 2026 or 2027.
 * Windows 10 or Windows 11, 64 bit.
 * A Revit project model for most tools. Tools that need a project tell you when a family document is open.
-* Optional: Claude Desktop and your own Claude account, only for [NexaAI](#nexaai).
+* Optional: Claude Desktop and your own Claude account, only for [NexaAI](#nexaai). Claude Desktop is a separate product from Anthropic and is not included with NexaBIM. Every other tool works without it.
 * Optional: NexaIFC Studio, only for [Nexa Bridge](#nexa-bridge) and the NexaIFC publishing buttons in [BCF](#bcf).
 * Optional: a Notion, ClickUp or Trello account, only if you want to send BCF issues as tickets.
 * Microsoft Excel is not needed to create workbooks. NexaBIM writes Excel files itself; you only need Excel or another spreadsheet app to open them.
@@ -81,7 +83,17 @@ This page is the complete user guide. Press F1 while the pointer is over any Nex
 4. If Revit shows a security prompt for the add in, choose to always load it so the prompt does not return.
 5. Open a project model and click any button on the NexaBIM tab.
 
-No account, license key or sign in is needed.
+No account, license key or sign in is needed. The About and Help buttons are also on the Add-Ins tab. NexaAI for Dynamo appears in Dynamo after the first Revit start, and NexaAI is ready to connect from its window once Claude Desktop is installed.
+
+## Uninstalling
+
+1. Close Revit.
+2. Uninstall NexaBIM from the Autodesk App Store manager or from Windows Settings, Apps. This removes the program files.
+3. Delete the %APPDATA%\NexaBIM and %LOCALAPPDATA%\NexaBIM folders. This also removes the MCP host, NexaAI sessions and logs.
+4. If you connected BCF tickets, delete the ticket connections file in %APPDATA%\Nexa.
+5. If you used NexaAI for Dynamo, delete the NexaAI for Dynamo folder from each packages folder under %APPDATA%\Dynamo\Dynamo Revit. Until you do, it stays inactive because NexaBIM is no longer loaded.
+6. If you used NexaAI, open %APPDATA%\Claude\claude_desktop_config.json, remove the NexaBIM entry under mcpServers, save the file and restart Claude Desktop. The NexaBIM backups next to that file can be deleted too.
+
 
 ## Getting Started
 
@@ -233,6 +245,8 @@ Copy elements between open models with Model Transfer, or copy a selection to ot
 **Features:**
 
 * Model Transfer copies elements with their hosts, relations and types.
+* Parent and child relations are kept: curtain walls, curtain systems and curtain roofs arrive with their grids, panels, mullions and curtain doors inside the same parent, and a copy that would leave a part loose is rolled back. Stairs arrive with their runs, landings, supports and railings, and multistory stairs with every story and their pinned or unpinned state.
+* When Revit cannot copy a multistory stair directly, Model Transfer rebuilds it from its standard stair on the destination levels at the same heights. Stories edited on their own in the source are unpinned in the destination and listed in the Log.
 * Smart Copy for rooms, sheets, schedules, spaces, room and space separation lines, levels and grids, each on its own tab with Check All and Copy Selected.
 * Duplicate types: keep source types with a suffix, or use destination types.
 * Optional model group for the copied elements, with a group name.
@@ -243,6 +257,8 @@ Copy elements between open models with Model Transfer, or copy a selection to ot
 
 * If the source file is in use by another Revit session, Model Transfer opens a temporary read copy.
 * Levels that already exist in the destination start unchecked in Smart Copy.
+* Copy the levels first with Smart Copy when the destination has no level at the height of a multistory stair story.
+* Checking a curtain panel, mullion, stair run or railing part copies its parent with all of its children, never the part on its own.
 
 ### Element Filter
 
@@ -1366,58 +1382,108 @@ Press F1 on its ribbon button, or open Help on the NexaBIM tab and use the tool 
 
 **How do I uninstall NexaBIM?**
 
-Close Revit and remove NexaBIM from Windows Settings under Apps.
+Close Revit and uninstall NexaBIM from the Autodesk App Store manager or from Windows Settings, Apps. To remove settings, logs and the NexaAI files too, follow [Uninstalling](#uninstalling).
 
 ## Privacy
 
 Effective date: 13 October 2026.
 
-NexaBIM is built to keep your work on your computer.
+NexaBIM runs inside Autodesk Revit on your computer. We do not collect, sell or share your personal information. The same statement is built into NexaBIM under About, Privacy.
 
-**What NexaBIM does not do**
+**Summary**
 
 * No account and no sign in.
-* No telemetry and no analytics.
-* No license checks and no update calls.
+* No telemetry, analytics, advertising or tracking.
+* No license checks and no update checks.
 * Your model data stays on your computer.
+* Data leaves your computer only when you send it to a service you connected.
 
-**Optional features that use the internet**
+**Who is responsible**
 
-* **NexaAI.** When you use Claude Desktop with NexaBIM, only what you ask Claude to read is sent to Anthropic, through Claude Desktop and under your own Claude account. The Anthropic terms and privacy policy for your account apply. NexaAI does nothing until Claude Desktop calls it, and model writes are off by default in every Revit session.
-* **BCF tickets.** Issues are sent to Notion, ClickUp or Trello only when you connect a platform and click Send Ticket. Your access tokens are encrypted with Windows data protection for your Windows user and stored in the ticket connections file in %APPDATA%\Nexa. The terms of the platform you choose apply.
+NexaBIM is published by Naresh Dhami, who is responsible for this statement. Contact details are at the end of this section.
 
-**Local connections**
+**Information we collect**
 
-* Nexa Bridge talks only to NexaIFC Studio on the same computer.
-* The NexaAI connector runs locally between Claude Desktop and Revit on the same computer.
+* **None through the software.** NexaBIM sends no telemetry, analytics, usage statistics or crash reports to us or to anyone else, and contains no third party analytics, advertising or tracking code.
+* **When you contact us.** If you email us, we use your email address and what you send, such as diagnostics or log files, only to answer you. We keep it only as long as needed to resolve your request and delete it when you ask.
+* **Autodesk App Store.** Autodesk runs the App Store, your Autodesk account, downloads and any payment under the Autodesk Privacy Statement. Customer details Autodesk shares with us as the publisher, such as a purchaser email address, are used only for support and to fulfil the purchase.
 
-**Files on your computer**
+**What starts with Revit**
 
-* Settings and presets: %APPDATA%\NexaBIM.
-* Logs, kept for 30 days, and caches: %LOCALAPPDATA%\NexaBIM.
-* NexaAI for Dynamo package: the packages folder of each Dynamo version under %APPDATA%\Dynamo\Dynamo Revit. Delete the NexaAI for Dynamo folder there to remove it.
+These parts start or are prepared when Revit starts. All of them stay on this computer and none of them sends anything over the internet.
+
+* **NexaAI bridge.** Starts with Revit so Claude Desktop can reach the open session. It listens only on a local named pipe restricted to your Windows user and protected by a token that is new for every session, and does nothing until Claude Desktop sends it a request through the NexaBIM MCP host. While Revit runs, a session file in %LOCALAPPDATA%\NexaBIM\NexaAI\Sessions holds the pipe name and token, the Revit and NexaBIM versions, your Windows user name, the open document title and active view name. It is deleted when Revit closes. Turn off **Start with Revit** on the Connect page of the NexaAI window to stop the bridge from starting.
+* **NexaBIM MCP host.** The first time Revit starts, NexaBIM copies its MCP host program to %LOCALAPPDATA%\NexaBIM\McpHost. It runs only when Claude Desktop starts it after you connect NexaAI.
+* **NexaAI for Dynamo.** The first time Revit starts, NexaBIM copies the NexaAI for Dynamo package to your Dynamo packages folder. It is active only in a Revit session where NexaBIM is loaded.
+* **Nexa Bridge.** Checks for NexaIFC Studio on this computer over a local loopback connection. It never connects to another computer.
+
+**Optional connected features**
+
+These features send data off your computer only after you connect them, and only when you ask.
+
+* **NexaAI with Claude Desktop.** When you ask Claude to read from Revit, the results you request, such as element data, parameter values, document titles, file paths and view images, are sent by Claude Desktop to Anthropic under your own Claude account and the Anthropic privacy policy. NexaBIM itself sends nothing to Anthropic. Model changes by Claude are off by default at the start of every session until you allow them. Only when you choose Connect does NexaBIM add or repair a NexaBIM entry in the Claude Desktop configuration file, keeping up to five backups of that file next to it. After that, it keeps the entry pointing at the current MCP host when Revit starts.
+* **BCF tickets.** Issues are sent to Notion, ClickUp or Trello only when you connect a platform and click Send Ticket. The issue fields, comments, images, attachments and element identifiers go to that service under your account and its own terms. Access tokens are encrypted with Windows data protection for your Windows user and stored in %APPDATA%\Nexa.
+* **Nexa Bridge with NexaIFC Studio.** Exchanges models and issues with NexaIFC Studio through files in %LOCALAPPDATA%\NexaIFC Studio and a local loopback connection on the same computer. Nothing leaves your computer.
+
+**Third parties**
+
+We do not sell, rent or give your information to anyone. Data you send with a connected feature goes directly from your computer to the service you chose, under your own account with that service, and NexaBIM sends only what you ask it to send. NexaBIM connects only to services that publish their own privacy commitments: Anthropic, Notion, ClickUp and Trello. Their privacy policies apply to the data you send them, and they are responsible for protecting it.
+
+**Files on your computer and how long they are kept**
+
+* Settings, presets and Recall snapshots: %APPDATA%\NexaBIM, kept until you delete them.
+* Logs: %LOCALAPPDATA%\NexaBIM\Logs. Logs record tool activity and errors and can include file paths and document names. Each log file is deleted after 30 days.
+* NexaAI sessions and settings, the MCP host program and caches: %LOCALAPPDATA%\NexaBIM. Session files are deleted when Revit closes.
+* Ticket connections: %APPDATA%\Nexa, kept until you disconnect the service.
+* Nexa Bridge exchange: %LOCALAPPDATA%\NexaIFC Studio.
+* NexaAI for Dynamo package: the packages folder of each Dynamo version under %APPDATA%\Dynamo\Dynamo Revit.
+* Claude Desktop entry: %APPDATA%\Claude\claude_desktop_config.json, only after you connect NexaAI.
+* Temporary files: the Windows temp folder, removed when the task ends or by Windows.
 * Files you export go only to the folders you choose.
 
 **What is written into your model**
 
 NexaBIM changes your model only through tools you run. Besides the edits you ask for, these tools may store data in the model:
 
-* Level Filter writes the LevelForFilter parameter.
+* Level Studio writes the LevelForFilter shared parameter.
 * Room Finish and Site Coords store extensible storage markers.
 * Recall stores the latest snapshot in the model only if you turn that option on.
 * Data Export writes IFC GUIDs to element parameters only if you choose that option.
 
-**Questions**
+**Your choices and consent**
 
-Email er.ndhami1995@gmail.com about privacy.
+* **NexaAI bridge:** turn off Start with Revit on the Connect page of the NexaAI window.
+* **Claude Desktop:** remove the NexaBIM entry under mcpServers in %APPDATA%\Claude\claude_desktop_config.json and restart Claude Desktop.
+* **Notion, ClickUp or Trello:** choose Disconnect in the BCF tickets settings, then revoke the token in that service.
+* **Data already sent:** ask Anthropic, Notion, ClickUp or Trello to delete it under their own policies. We hold no copy, so there is nothing for us to delete.
+
+To remove everything NexaBIM stored, follow [Uninstalling](#uninstalling).
+
+**Children**
+
+NexaBIM is professional software for building design and is not directed at children. We do not knowingly collect information from anyone, including children.
+
+**Changes to this statement**
+
+When this statement changes, the new version ships with NexaBIM and is published here with a new effective date.
+
+**Contact**
+
+Naresh Dhami, er.ndhami1995@gmail.com.
+
+## License
+
+NexaBIM is copyright © 2026 Naresh Dhami. All rights reserved.
+
+NexaBIM is licensed to you under the Autodesk App Store end user license agreement shown when you install it. The third party components listed below keep their own licenses. Nothing in the NexaBIM license agreement limits the rights the GNU Lesser General Public License gives you for ProjNET: you may replace ProjNET.dll with a compatible build, and you may modify NexaBIM for your own use and reverse engineer it as far as needed to debug such modifications, as section 6 of that license requires.
 
 ## Third Party Notices
 
 NexaBIM includes or uses the components below. Each is the property of its owners and is provided under its own license. The full license texts are included with the product and shown on the Notices page of the About window.
 
-* **ProjNET** version 2.1.0, copyright NetTopologySuite Team and Morten Nielsen. GNU Lesser General Public License version 2.1 or later. Used for coordinate system definitions and transformations in Site Coords and Location Info. Shipped unmodified as a separate file that you may replace with a compatible build as the LGPL permits. Source: [ProjNET on GitHub](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
+* **ProjNET** version 2.1.0, copyright NetTopologySuite Team and Morten Nielsen. GNU Lesser General Public License version 2.1 or later. Used for coordinate system definitions and transformations in Site Coords and Location Info. Shipped unmodified as a separate file that you may replace with a compatible build as the LGPL permits; see [License](#license) for your LGPL rights. Source: [ProjNET on GitHub](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
 * **NetTopologySuite**, the project that maintains ProjNET.
-* **Microsoft .NET libraries and runtime**, copyright .NET Foundation and Contributors. MIT License. Source: [.NET runtime on GitHub](https://github.com/dotnet/runtime).
+* **Microsoft .NET libraries and runtime**, copyright .NET Foundation and Contributors. MIT License. System.Memory, System.Buffers, System.Numerics.Vectors and System.Runtime.CompilerServices.Unsafe in the Revit 2024 build, and the .NET runtime included in the self contained NexaBIM MCP Host. Source: [.NET runtime on GitHub](https://github.com/dotnet/runtime).
 * **EPSG Geodetic Parameter Dataset**, owned by IOGP, the International Association of Oil and Gas Producers. The coordinate system catalog of Site Coords and Location Info is derived from it. Terms of use: [epsg.org terms of use](https://epsg.org/terms-of-use.html).
 * **Revit IFC default category mapping**, copyright Autodesk, Inc., from the [Autodesk Revit IFC project](https://github.com/Autodesk/revit-ifc). GNU Library General Public License version 2. Used as the default IFC class to Revit category mapping in Data Export.
 
@@ -1429,7 +1495,7 @@ Autodesk, Revit, Dynamo and Navisworks are registered trademarks or trademarks o
 
 * Email: er.ndhami1995@gmail.com
 * Help page: [NexaBIM Help Section](https://github.com/07naresh07/NexaBIM_HelpSection)
-* Publisher: NexaBIM
+* Publisher: Naresh Dhami
 
 When you write, please include:
 

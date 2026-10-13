@@ -77,7 +77,7 @@ This page is the complete user guide. Press F1 while the pointer is over any Nex
 
 ## Installation
 
-1. Get NexaBIM from the Autodesk App Store and run the installer it provides.
+1. Get NexaBIM free from the Autodesk App Store and run the installer it provides.
 2. Close Revit before installing if it is open.
 3. Start Revit. NexaBIM loads automatically and the NexaBIM tab appears on the ribbon.
 4. If Revit shows a security prompt for the add in, choose to always load it so the prompt does not return.
@@ -245,8 +245,6 @@ Copy elements between open models with Model Transfer, or copy a selection to ot
 **Features:**
 
 * Model Transfer copies elements with their hosts, relations and types.
-* Parent and child relations are kept: curtain walls, curtain systems and curtain roofs arrive with their grids, panels, mullions and curtain doors inside the same parent, and a copy that would leave a part loose is rolled back. Stairs arrive with their runs, landings, supports and railings, and multistory stairs with every story and their pinned or unpinned state.
-* When Revit cannot copy a multistory stair directly, Model Transfer rebuilds it from its standard stair on the destination levels at the same heights. Stories edited on their own in the source are unpinned in the destination and listed in the Log.
 * Smart Copy for rooms, sheets, schedules, spaces, room and space separation lines, levels and grids, each on its own tab with Check All and Copy Selected.
 * Duplicate types: keep source types with a suffix, or use destination types.
 * Optional model group for the copied elements, with a group name.
@@ -257,8 +255,6 @@ Copy elements between open models with Model Transfer, or copy a selection to ot
 
 * If the source file is in use by another Revit session, Model Transfer opens a temporary read copy.
 * Levels that already exist in the destination start unchecked in Smart Copy.
-* Copy the levels first with Smart Copy when the destination has no level at the height of a multistory stair story.
-* Checking a curtain panel, mullion, stair run or railing part copies its parent with all of its children, never the part on its own.
 
 ### Element Filter
 

@@ -1,6 +1,6 @@
 # NexaBIM Help
 
-NexaBIM is a suite of productivity tools for Autodesk Revit, published by Naresh Dhami. It adds a NexaBIM tab to the Revit ribbon with tools for coordinates, element and parameter management, data and 3D export, rooms, modelling, coordination, views and an AI connector for Claude Desktop.
+NexaBIM is a suite of productivity tools for Autodesk Revit. It adds a NexaBIM tab to the Revit ribbon with tools for coordinates, element and parameter management, data and 3D export, rooms, modelling, coordination, views and an AI connector for Claude Desktop.
 
 This page is the complete user guide. Press F1 while the pointer is over any NexaBIM ribbon button to open that tool's section of this page directly.
 
@@ -1396,7 +1396,7 @@ NexaBIM runs inside Autodesk Revit on your computer. We do not collect, sell or 
 
 **Who is responsible**
 
-NexaBIM is published by Naresh Dhami, who is responsible for this statement. Contact details are at the end of this section.
+NexaBIM is responsible for this statement. Contact details are at the end of this section.
 
 **Information we collect**
 
@@ -1465,11 +1465,11 @@ When this statement changes, the new version ships with NexaBIM and is published
 
 **Contact**
 
-Naresh Dhami, er.ndhami1995@gmail.com.
+NexaBIM, er.ndhami1995@gmail.com.
 
 ## License
 
-NexaBIM is copyright © 2026 Naresh Dhami. All rights reserved.
+NexaBIM is copyright © 2026 NexaBIM. All rights reserved.
 
 NexaBIM is licensed to you under the Autodesk App Store end user license agreement shown when you install it. The third party components listed below keep their own licenses. Nothing in the NexaBIM license agreement limits the rights the GNU Lesser General Public License gives you for ProjNET: you may replace ProjNET.dll with a compatible build, and you may modify NexaBIM for your own use and reverse engineer it as far as needed to debug such modifications, as section 6 of that license requires.
 
@@ -1491,7 +1491,7 @@ Autodesk, Revit, Dynamo and Navisworks are registered trademarks or trademarks o
 
 * Email: er.ndhami1995@gmail.com
 * Help page: [NexaBIM Help Section](https://github.com/07naresh07/NexaBIM_HelpSection)
-* Publisher: Naresh Dhami
+* Publisher: NexaBIM
 
 When you write, please include:
 
